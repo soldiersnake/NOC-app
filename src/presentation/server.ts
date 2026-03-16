@@ -20,6 +20,8 @@ export class Server {
                     fileSystemLogRepository,
                     () => console.log(`${url} is Ok`),
                     (error) => console.log(error),
+                    // undefined,
+                    // undefined,
                 ).execute(url);
                 // new CheckService().execute('http://localhost:3000/posts');
             });
