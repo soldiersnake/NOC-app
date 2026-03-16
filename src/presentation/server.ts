@@ -12,10 +12,12 @@ export class Server {
 
         console.log('Server started...');
 
+        // generacion de emails
+
         CronService.createJob(
             '*/5 * * * * *',
             () => {
-                const url = 'https://localhost:3000';
+                const url = 'https://google.com';
                 new CheckService(
                     fileSystemLogRepository,
                     () => console.log(`${url} is Ok`),

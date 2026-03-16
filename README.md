@@ -13,3 +13,4 @@ MAILER_SECRET_KEY=123456
 
 PROD=true
 ```
+3. Instalar dependencias con ```npm install``` y luego ejecutar con ```npm run dev```

@@ -6,7 +6,7 @@ import { Server } from "./presentation/server";
 })();
 
 async function main() {
-    // Server.start();
+    Server.start();
     // console.log(envs);
 
 }
