@@ -22,3 +22,5 @@
 {"level":"low","message":"Service https://google.com working","createdAt":"2026-03-16T22:27:00.300Z","origin":"check-service.ts"}
 {"level":"low","message":"Service https://google.com working","createdAt":"2026-03-16T22:27:05.306Z","origin":"check-service.ts"}
 {"level":"low","message":"Service https://google.com working","createdAt":"2026-03-16T22:27:10.287Z","origin":"check-service.ts"}
+{"level":"low","message":"Email sent","createdAt":"2026-03-21T20:20:38.742Z","origin":"email.service.ts"}
+{"level":"high","message":"Error: Email log not sent","createdAt":"2026-03-21T20:36:23.809Z","origin":"send-email-logs.ts"}
