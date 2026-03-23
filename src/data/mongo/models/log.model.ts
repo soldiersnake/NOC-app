@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { LogEntityOptions } from "../../../domian/entities/log.entity";
 
 const logSchema = new mongoose.Schema({
     message: {
@@ -19,4 +20,4 @@ const logSchema = new mongoose.Schema({
     },
 });
 
-export const LogModel = mongoose.model('Log', logSchema);
+export const LogModel = mongoose.model<LogEntityOptions>('Log', logSchema);
