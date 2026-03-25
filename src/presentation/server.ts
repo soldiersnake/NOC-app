@@ -1,15 +1,20 @@
+import { LogSeverityLevel } from "../domian/entities/log.entity";
+import { CheckService } from "../domian/use-cases/checks/check-service";
 import { SendEmailLogs } from "../domian/use-cases/email/send-email-logs";
 import { FileSystemDatasources } from "../infrastructure/datasources/file-system.datasources";
+import { MongoLogDatasource } from "../infrastructure/datasources/mongo-log.datasource";
 import { LogRepositoryImpl } from "../infrastructure/repositories/log-impl.repository";
+import { CronService } from "./cron/cron-service";
 import { EmailService } from "./email/email.service";
 
-const fileSystemLogRepository = new LogRepositoryImpl(
-    new FileSystemDatasources(),
+const LogRepository = new LogRepositoryImpl(
+    // new FileSystemDatasources(),
+    new MongoLogDatasource(),
 );
 const emailService = new EmailService();
 
 export class Server {
-    public static start() {
+    public static async start() {
 
         console.log('Server started...');
 
@@ -24,14 +29,16 @@ export class Server {
         //     'demiansnake5@gmail.com', 'mariano.maciasgandulfo@gmail.com'
         // ]);
 
-        // generacion de emails
+        const logs = await LogRepository.getLogs(LogSeverityLevel.low);
+        console.log(logs);
+        
 
         // CronService.createJob(
         //     '*/5 * * * * *',
         //     () => {
-        //         const url = 'https://google.com';
+        //         const url = 'https://gooasdgle.com';
         //         new CheckService(
-        //             fileSystemLogRepository,
+        //             LogRepository,
         //             () => console.log(`${url} is Ok`),
         //             (error) => console.log(error),
         //             // undefined,

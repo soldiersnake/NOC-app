@@ -28,12 +28,14 @@ export class LogEntity {
         this.createdAt = createdAt;
     }
 
-    static fromJson = (json: string): LogEntity => {
+    static fromJson = (json: string ): LogEntity => {
+        json = ( json === '') ? '{}' : json;
+
         const { message, level, createdAt, origin } = JSON.parse(json);
 
-        if (!message) throw new Error('Message is required');
-        if (!level) throw new Error('Level is required');
-        if (!createdAt) throw new Error('CreatedAt is required');
+        // if (!message) throw new Error('Message is required');
+        // if (!level) throw new Error('Level is required');
+        // if (!createdAt) throw new Error('CreatedAt is required');
 
         const log = new LogEntity({
             message,
