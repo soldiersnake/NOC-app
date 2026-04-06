@@ -29,8 +29,8 @@ export class Server {
         //     'demiansnake5@gmail.com', 'mariano.maciasgandulfo@gmail.com'
         // ]);
 
-        const logs = await LogRepository.getLogs(LogSeverityLevel.low);
-        console.log(logs);
+        // const logs = await LogRepository.getLogs(LogSeverityLevel.low);
+        // console.log(logs);
         
 
         // CronService.createJob(

@@ -1,30 +1,44 @@
 import { LogModel, MongoDatabase } from "./data/mongo";
 import { Server } from "./presentation/server";
-import { envs } from './config/plugins/envs.plugin';
+import { envs } from "./config/plugins/envs.plugin";
+import { PrismaClient } from "@prisma/client";
+import { PrismaPg } from "@prisma/adapter-pg";
+import { Pool } from "pg";
 
 (async () => {
     main();
 })();
 
 async function main() {
-    MongoDatabase.connect({
-        mongoUrl: envs.MONGO_URL,
-        dbName: envs.MONGO_DB_NAME
-    });
+  MongoDatabase.connect({
+    mongoUrl: envs.MONGO_URL,
+    dbName: envs.MONGO_DB_NAME,
+  });
 
-    // Crear una coleccion = tables, documento = registro
-    // const newLog = await LogModel.create({
-    //     message: 'Test message desde Mongo',
-    //     origin: 'App.ts',
-    //     level: 'low'
+  const connectionString = envs.POSTGRES_URL.replace(/^"+|"+$/g, "");
+  const pool = new Pool({ connectionString });
+  const adapter = new PrismaPg(pool);
+  const prisma = new PrismaClient({ adapter });
+
+  try {
+    // const newLog = await prisma.logModel.create({
+    //   data: {
+    //     level: "HIGH",
+    //     message: "Test Message",
+    //     origin: "App.ts",
+    //   },
     // });
-
-    // await newLog.save();
     // console.log(newLog);
-    // const logs = await LogModel.find();
-    // console.log(logs);
+    const logs = await prisma.logModel.findMany();
+    console.log(logs);
+    
 
+  } catch (error) {
+    console.error("Error al insertar log en Postgres:", error);
+  } finally {
+    await prisma.$disconnect();
+    await pool.end();
+  }
 
-
-    Server.start();
+  // Server.start();
 }
