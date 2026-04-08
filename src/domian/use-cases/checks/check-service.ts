@@ -29,7 +29,7 @@ export class CheckService implements CheckServiceUseCase {
                 level: LogSeverityLevel.low,
                 origin: 'check-service.ts'
             });
-            this.logRepository.saveLog(log);
+            await this.logRepository.saveLog(log);
             this.successCallback && this.successCallback();
             return true;
         } catch (error) {
@@ -39,7 +39,7 @@ export class CheckService implements CheckServiceUseCase {
                 level: LogSeverityLevel.high,
                 origin: 'check-service.ts'
             });
-            this.logRepository.saveLog(log);
+            await this.logRepository.saveLog(log);
             this.errorCallback && this.errorCallback(`${errorMessage}`);
             return false;
         }
